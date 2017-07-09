@@ -1,5 +1,8 @@
-﻿/* Program for calculating Scrabble word scores. Takes user input, converts to lowercase and checks against 
-switch cases for letter values. Presents score to user, asks if another word score is desired otherwise exits.*/
+// Program for calculating Scrabble word scores
+// as per the rules given by Hooroo Academy.
+// Author: Cameo Langford
+// Created on: 04/07/2017
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,13 @@ namespace ScrabbleConsole
 {
     class ScrabbleCalc
     {
+        // The main function of the program for calculating Scrabble word scores works as follows:
+        //  - takes user input,
+        //  - converts to lowercase,
+        //  - checks against each letter values and adds it a total score.
+        //  - present the final total score to user
+        //  - asks if another word score is desired otherwise exit.
+        
         static void Main(string[] args)
         {
             string answer = "";
@@ -19,7 +29,6 @@ namespace ScrabbleConsole
                 string userInput = Console.ReadLine().ToLower();
                 int scrabbleScore = 0;
                 
-                //for every letter in userInput, check against cases and increase score value
                 foreach (char letter in userInput)
                 {
                     switch (letter)
@@ -76,6 +85,6 @@ namespace ScrabbleConsole
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
-}
     }
+}
 
