@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 
 namespace ScrabbleConsole
 {
+    /// <summary>
+    /// Scrabble Class represents an object, which stores a used entered word
+    /// when an object of this class is instantiated, a method to validate the object’s
+    ///  word and another method to calculate the scrabble word score value.
+    /// </summary>
     public class Scrabble
     {
         string word;
@@ -21,31 +26,28 @@ namespace ScrabbleConsole
         public Scrabble(string word)
         {
             this.word = word;
+            this.score = 0;
         }
 
         /// <summary>
-        /// Validates user input to ensure only letters are entered
+        /// Validates user input to ensure only letters are entered.
         /// Advises user if characters other than letters are entered
         /// </summary>
         /// <param name="word"></param>
-        public void Validate(string word)
+        public bool Validate()
         {
-            bool result = word.All(Char.IsLetter);
-            if (result == true)
+            if (word.All(Char.IsLetter))
             {
-                this.Calculate(word);
+                return true;
             }
-            else
-            {
-                Console.WriteLine("Please input letters only.\n");
-            }
+            return false;
         }
 
         /// <summary>
         /// Calculates user's scrabble score
         /// </summary>
         /// <param name="word"></param>
-        public void Calculate(string word)
+        public void Calculate()
         {
             foreach (char letter in word)
             {
@@ -117,11 +119,18 @@ namespace ScrabbleConsole
                 Console.WriteLine("Welcome to the Scrabble Score Calculator! Please input your word:\n");
                 string word = Console.ReadLine().ToString();
                 Scrabble scrabble = new Scrabble(word);
-                scrabble.Validate(word);
-                Console.WriteLine("\nWould you like to score another word? Y/N");
+                if (scrabble.Validate())
+                {
+                    scrabble.Calculate();
+                }
+                else if (!scrabble.Validate())
+                {
+                    Console.WriteLine("Please enter a valid word.");
+                }
+                Console.WriteLine("\nWould you like to exit? Y/N");
                 answer = Console.ReadLine();
             }
-            while ((answer == "y" || answer == "Y") ? true : (answer == "n" || answer == "N") ? false : true);
+            while ((answer == "y" || answer == "Y") ? false : true);
         }
     }
 }
